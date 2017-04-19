@@ -57,7 +57,9 @@ $(function() {
 
       beforeEach(function(){
         menu = document.getElementsByTagName('body')[0];
+        // menuLink = document.getElementsByClassName('menu-icon-link');
         menuClass = menu.className;
+        menuIcon = document.getElementsByClassName('icon-list');
       });
 
       /* TODO: Write a test that ensures the menu element is
@@ -74,6 +76,14 @@ $(function() {
         * should have two expectations: does the menu display when
         * clicked and does it hide when clicked again.
         */
+        it('should toggle menu when clicked', function(){
+
+          $('.menu-icon-link').click();
+          expect(document.body.className).not.toContain('menu-hidden');
+          $('.menu-icon-link').click();
+          expect(document.body.className).toContain('menu-hidden');
+
+        });
 
     });
 
