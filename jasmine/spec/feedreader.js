@@ -31,12 +31,18 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+         it('should each contain a url property', function(){
+           allFeeds.forEach(function(feed){
+             console.log(feed.url);
+             expect(feed.url).toBeDefined();
+           });
+         })
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         
     });
 
 
