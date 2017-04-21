@@ -76,7 +76,7 @@ $(function() {
         * should have two expectations: does the menu display when
         * clicked and does it hide when clicked again.
         */
-        it('should togglea menu when clicked', function(){
+        it('should toggle a menu when clicked', function(){
 
           $('.menu-icon-link').click();
           expect(document.body.className).not.toContain('menu-hidden');
@@ -107,13 +107,27 @@ $(function() {
 
   /* TODO: Write a new test suite named "New Feed Selection" */
   describe('New Feed Selection', function(){
+      var initialFeed;
 
+      beforeEach(function(done){
+        initialFeed =
+        loadFeed(0, done);
+      });
+
+      var feed = $('h1').html();
       /* TODO: Write a test that ensures when a new feed is loaded
        * by the loadFeed function that the content actually changes.
        * Remember, loadFeed() is asynchronous.
        */
+      it('should change the content when loadFeed() is called', function(done){
+        loadFeed(0,done);
+        expect(feed).not.toBe('Feeds');
 
-       
+      })
+
+
+
+
 
   });
 
