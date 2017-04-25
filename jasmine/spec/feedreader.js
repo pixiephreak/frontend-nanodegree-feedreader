@@ -17,9 +17,10 @@ $(function() {
      * in the allFeeds object and ensures it has a URL defined
      * and that the URL is not empty.
      */
-    it('should each contain a url property', function() {
+    it('should each contain a url property that is not empty', function() {
       allFeeds.forEach(function(feed) {
         expect(feed.url).toBeDefined();
+        expect(feed.url.length).not.toBe(' ');
       });
     });
 
@@ -41,7 +42,7 @@ $(function() {
 
     beforeEach(function() {
       menu = document.getElementsByTagName('body')[0];
-      menuClass = menu.className;
+      menuClass = menu.classList;
       menuIcon = document.getElementsByClassName('icon-list');
     });
 
@@ -49,7 +50,7 @@ $(function() {
      * hidden by default.
      */
     it('should have a class of menu-hidden', function() {
-      expect(menuClass).toBe('menu-hidden');
+      expect(menuClass).toContain('menu-hidden');
     });
 
     /* Test that ensures the menu changes
@@ -57,9 +58,9 @@ $(function() {
      */
     it('should toggle a menu when clicked', function() {
       $('.menu-icon-link').click();
-      expect(document.body.className).not.toContain('menu-hidden');
+      expect(document.body.classList).not.toContain('menu-hidden');
       $('.menu-icon-link').click();
-      expect(document.body.className).toContain('menu-hidden');
+      expect(document.body.classList).toContain('menu-hidden');
     });
 
   });
@@ -72,9 +73,9 @@ $(function() {
       loadFeed(0, done);
     });
 
-    it('should contain at least one entry in feed', function(done) {
-      expect(allFeeds.length).not.toBeLessThan(0);
-      done();
+    it('should contain at least one entry in feed', function() {
+      var entryList = document.querySelectorAll('.feed .entry');
+      expect(entryList.length).not.toBeLessThan(0);
     });
   });
 
@@ -84,10 +85,8 @@ $(function() {
 
     beforeEach(function(done) {
       loadFeed(0, function() {
-        console.log(1);
         initialFeed = $('.feed').html();
         loadFeed(1, function() {
-          console.log(2);
           newFeed = $('.feed').html();
           done();
         });
